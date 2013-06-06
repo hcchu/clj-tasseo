@@ -3,13 +3,15 @@
   (:use hiccup.core)
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
+            [cheshire.core :refer :all]
             [me.raynes.fs :as fs]))
 
 (def dashboards_dir (fs/normalized-path "resources/dashboards"))
 
 (defn find-dashboards [dashboards_dir]
   (into []
-        (filter #(re-matches #".+\.js$" %) (fs/list-dir dashboards_dir))))
+        (map #(first (clojure.string/split % #"\."))
+             (filter #(re-matches #".+\.js$" %) (fs/list-dir dashboards_dir)))))
 
 (def dashboards (find-dashboards dashboards_dir))
 
@@ -31,10 +33,24 @@
         (if-not (empty? dashboards)
           [:div {:class "nav"}
            [:ul
-            (map #(html [:li [:a {:href %} (str %)]]) dashboards)]])))
+            (map #(html [:li [:a {:href %} (str %)]]) dashboards)]]
+          (html [:p "No dashboard files found."]))))
+
+(defn index-json [dashboards]
+  (if-not (empty? dashboards)
+    ({:status 200
+     :headers {"Content-Type" "application/json"}
+     :body (generate-string dashboards)})
+    {:status 204
+     :headers {"Content-Type" "application/json"}}))
 
 (defroutes app-routes
-  (GET "/" [] (index-page dashboards))
+  (GET "/" {{accept "accept"} :headers}
+       (if (re-find #"application\/json" accept)
+         (index-json dashboards)
+         (index-page dashboards)))
+  (GET "/health" [] {:headers {"Content-Type" "json" }
+                     :body (generate-string {"status" "ok"})})
   (route/resources "/")
   (route/not-found "Not Found"))
 
