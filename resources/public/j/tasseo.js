@@ -290,38 +290,38 @@ $('.title span').on('change', 'select', function() {
 });
 
 // activate night mode
-function enableNightMode() {
-  $('body').addClass('night');
-  $('div.title h1').addClass('night');
-  $('div.graph svg').css('opacity', '0.8');
-  $('span.description').addClass('night');
-  $('div.overlay-name').addClass('night');
-  $('div.overlay-number').addClass('night');
-  $('div.toolbar ul li.timepanel').addClass('night');
-}
+//function enableNightMode() {
+//  $('body').addClass('night');
+//  $('div.title h1').addClass('night');
+//  $('div.graph svg').css('opacity', '0.8');
+//  $('span.description').addClass('night');
+//  $('div.overlay-name').addClass('night');
+//  $('div.overlay-number').addClass('night');
+//  $('div.toolbar ul li.timepanel').addClass('night');
+//}
 
 // deactivate night mode
-function disableNightMode() {
-  $('body').removeClass('night');
-  $('div.title h1').removeClass('night');
-  $('div.graph svg').css('opacity', '1.0');
-  $('span.description').removeClass('night');
-  $('div.overlay-name').removeClass('night');
-  $('div.overlay-number').removeClass('night');
-  $('div.toolbar ul li.timepanel').removeClass('night');
-}
+//function disableNightMode() {
+//  $('body').removeClass('night');
+//  $('div.title h1').removeClass('night');
+//  $('div.graph svg').css('opacity', '1.0');
+//  $('span.description').removeClass('night');
+//  $('div.overlay-name').removeClass('night');
+//  $('div.overlay-number').removeClass('night');
+//  $('div.toolbar ul li.timepanel').removeClass('night');
+//}
 
 // activate night mode by click
-$('li.toggle-night').on('click', 'a', function() {
-  if ($('body').hasClass('night')) {
-    disableNightMode();
-  } else {
-    enableNightMode();
-  }
-});
+//$('li.toggle-night').on('click', 'a', function() {
+//  if ($('body').hasClass('night')) {
+//    disableNightMode();
+//  } else {
+//    enableNightMode();
+//  }
+//});
 
 // toggle number display
-$('li.toggle-nonum').on('click', 'a', function() { $('div.overlay-number').toggleClass('nonum'); });
+//$('li.toggle-nonum').on('click', 'a', function() { $('div.overlay-number').toggleClass('nonum'); });
 
 // time panel, pause live feed and show range
 $('.toolbar ul li.timepanel').on('click', 'a.range', function() {

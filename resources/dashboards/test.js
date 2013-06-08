@@ -1,9 +1,15 @@
 var metrics =
 [
   {
-    "alias": "cust073-cpu-usage",
-    "target": "nydc.cust073.load.load_one",
-    "warning": 50,
-    "critical": 90 
+    "alias": "api-all-success",
+    "target": "api.handlers.all.success",
+    "warning": 750,
+    "critical": 1000 
+  },
+  {
+    "alias": "api-any-success",
+    "target": "api.handlers.any.success",
+    "warning": 750,
+    "critical": 1000 
   }
 ];

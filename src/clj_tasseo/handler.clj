@@ -74,9 +74,10 @@
               [:a {:href "#"} [:img {:src "i/toggle-night.png"}]]]]]]
           [:div.main
            (javascript-tag
-             "var url = \"http://grapper.nydc.fxcorp.prv\"; var auth = \"\";")
+             "var url = \"http://admin.upverter.com\"; var auth = \"\";")
            [:script {:type "text/javascript" :src (str "dashboards/" path ".js")}]
-           [:script {:type "text/javascript" :src "j/tasseo.js"}]]]])))
+           [:script {:type "text/javascript" :src "j/tasseo.js"}]
+           [:script {:type "text/javascript" :src "j/clj-tasseo.js"}]]]])))
 
 (defn no-dashboard []
   (do
