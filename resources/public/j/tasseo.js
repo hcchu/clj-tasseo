@@ -268,11 +268,11 @@ $('.title').on('hover', 'span', function() {
 });
 
 // display description
-$(document).on('mouseenter', 'div.graph', function() {
-  if ($(this).find('span.description').text().length > 0) {
-    $(this).find('span.description').css('visibility', 'visible');
-  }
-});
+//$(document).on('mouseenter', 'div.graph', function() {
+//  if ($(this).find('span.description').text().length > 0) {
+//    $(this).find('span.description').css('visibility', 'visible');
+//  }
+//});
 
 // hide description
 $(document).on('mouseleave', 'div.graph', function() {
@@ -285,9 +285,9 @@ $('.title span').on('focusout', 'select', function() {
 });
 
 // navigate to selection
-$('.title span').on('change', 'select', function() {
-  window.location.pathname = '/' + $(this).val();
-});
+//$('.title span').on('change', 'select', function() {
+//  window.location.pathname = '/' + $(this).val();
+//});
 
 // activate night mode
 //function enableNightMode() {

@@ -4,9 +4,39 @@
             [dommy.attrs :as attrs]
             [dommy.template :as template]))
 
+;; allow dommy to work on svg elements
 (extend-protocol template/PElement
   js/SVGSVGElement
+  (-elem [this] this)
+  js/SVGPathElement
   (-elem [this] this))
+
+;; display description
+(->> (sel [:div.graph :span])
+     (mapv #(-> % (dommy/listen! 
+                   :mouseenter 
+                   (fn []
+                     (let [textlength (->> (sel1 :.description)
+                                                (.-textContent)
+                                                (.-length))]
+                     (js/console.log textlength)))))))
+
+                     ;(let [textlength (->> (sel :span.description)
+                     ;                      (.-textContent)
+                     ;                      (.-length))]
+                     ;  (js/console.log textlength)))))))
+                       ;;(if (> textlength 0)
+                       ;  (attrs/set-style!
+                        ;   (sel1 :span.description) :visibility "visible")))))))) 
+
+                   ;;(fn [] (js/console.log (.-length (.-textContent (sel1 :span.description)))))))))
+
+;; navigation to selection
+(-> (sel1 :div.title)
+    (sel1 :span) 
+    (dommy/listen! :change (fn []
+                             (let [pathstring (str "/" (.-value (sel1 :select)))]
+                               (set! js/window.location.pathname pathstring))))) 
 
 (defn enableNightMode []
   (do (dommy/add-class! (sel1 :body) "night")
@@ -26,14 +56,16 @@
       (mapv #(dommy/remove-class! % "night") (sel [:div.overlay-number]))
       (mapv #(dommy/remove-class! % "night") (sel [:div.toolbar :ul :li.timepanel]))))
 
+;; night mode toggle button
 (-> (sel1 :li.toggle-night)
     (dommy/listen! :click (fn [] (if (attrs/has-class? (sel1 :body) "night")
                                 (disableNightMode)
                                 (enableNightMode)))))
 
+;; numbers toggle button
 (-> (sel1 :li.toggle-nonum)
     (sel1 :a)
     (dommy/listen! :click (fn [] (mapv #(dommy/toggle-class! % "nonum")
                                        (sel [:div.overlay-number])))))
 
-
+;;(set! js/window.location.pathname "/")

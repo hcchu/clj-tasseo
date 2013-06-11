@@ -42,9 +42,9 @@
 
 (defn index-json [dashboards]
   (if-not (empty? dashboards)
-    ({:status 200
+    {:status 200
      :headers {"Content-Type" "application/json"}
-     :body (generate-string dashboards)})
+     :body (generate-string {:dashboards dashboards})}
     {:status 204
      :headers {"Content-Type" "application/json"}}))
 
