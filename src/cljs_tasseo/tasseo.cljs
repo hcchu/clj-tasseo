@@ -12,24 +12,28 @@
   (-elem [this] this))
 
 ;; display description
-(->> (sel [:div.graph :span])
+(->> (sel [:div.graph])
      (mapv #(-> % (dommy/listen! 
                    :mouseenter 
-                   (fn []
-                     (let [textlength (->> (sel1 :.description)
-                                                (.-textContent)
-                                                (.-length))]
-                     (js/console.log textlength)))))))
+                   (fn [] (let [elem (-> % (sel1 :span.description))
+                                textlength (.-length (.-textContent elem))]
+                            (if (> textlength 0)
+                              (attrs/set-style! elem :visibility "visible"))))))))
 
-                     ;(let [textlength (->> (sel :span.description)
-                     ;                      (.-textContent)
-                     ;                      (.-length))]
-                     ;  (js/console.log textlength)))))))
-                       ;;(if (> textlength 0)
-                       ;  (attrs/set-style!
-                        ;   (sel1 :span.description) :visibility "visible")))))))) 
+;; hide description
+(->> (sel [:div.graph])
+     (mapv #(-> % (dommy/listen! 
+                   :mouseleave
+                   (fn [] (let [elem (-> % (sel1 :span.description))]
+                              (attrs/set-style! elem :visibility "hidden")))))))
 
-                   ;;(fn [] (js/console.log (.-length (.-textContent (sel1 :span.description)))))))))
+;; clear navigation list on focusout
+(-> (sel1 :div.title)
+    (dommy/listen! :focusout (fn []
+                               (let [title (clojure.string/replace 
+                                             js/window.location.pathname 
+                                             #"^/" "")]
+                                 (dommy/set-html! (sel1 :span) title)))))
 
 ;; navigation to selection
 (-> (sel1 :div.title)
@@ -68,4 +72,3 @@
     (dommy/listen! :click (fn [] (mapv #(dommy/toggle-class! % "nonum")
                                        (sel [:div.overlay-number])))))
 
-;;(set! js/window.location.pathname "/")

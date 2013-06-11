@@ -275,14 +275,14 @@ $('.title').on('hover', 'span', function() {
 //});
 
 // hide description
-$(document).on('mouseleave', 'div.graph', function() {
-  $(this).find('span.description').css('visibility', 'hidden');
-});
+//$(document).on('mouseleave', 'div.graph', function() {
+//  $(this).find('span.description').css('visibility', 'hidden');
+//});
 
 // clear navigation list on focusout
-$('.title span').on('focusout', 'select', function() {
-  $('.title span').html(window.location.pathname.replace(/^\//, ''));
-});
+//$('.title span').on('focusout', 'select', function() {
+//  $('.title span').html(window.location.pathname.replace(/^\//, ''));
+//});
 
 // navigate to selection
 //$('.title span').on('change', 'select', function() {

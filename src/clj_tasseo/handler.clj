@@ -21,7 +21,7 @@
     [:title "Tasseo"]
     [:meta {:content "text/html;charset=utf-8" :http-equiv "Content-Type"}]
     [:link {:href "c/style.css" :rel "stylesheet" :type "text/css"} ]
-    [:script {:src "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
+    [:script {:src "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
               :type "text/javascript"}]
     [:script {:src "j/d3.v2.min.js" :type "text/javascript"}]
     [:script {:src "j/rickshaw.min.js" :type "text/javascript"}]
